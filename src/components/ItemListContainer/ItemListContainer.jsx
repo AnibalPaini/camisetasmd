@@ -2,11 +2,11 @@ import React from 'react'
 import Filters from '../Filters/Filters'
 
 
-function ItemListContainer({products}) {
+function ItemListContainer({products, changeFilters}) {
   
   return (
     <main className="container-sm mt-5">
-      <Filters/>
+      <Filters onChange={changeFilters}/>
         <h2 className='fontP'>Productos</h2>
         <div className="container">
             <div className="row">

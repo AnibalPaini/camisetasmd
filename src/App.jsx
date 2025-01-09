@@ -1,13 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {products as initialProducts} from "./mocks.json"
-import Navbar from './components/Navbar/Navbar.jsx';
+import Navbar1 from './components/Navbar/Navbar1.jsx';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import './App.css'
 import { useState } from 'react';
 
-function App() {
-  const [products]= useState(initialProducts)
+function useFilters(){
   const [filters, setFilters]= useState({
     equipo:"all",
     minPrice:0
@@ -24,12 +23,20 @@ function App() {
     })
   }
 
-  const filteredProducts = filterProducts(products)
+  return {filterProducts, setFilters}
+}
 
+function App() {
+  const [products]= useState(initialProducts)
+  const {filterProducts, setFilters} = useFilters()
+  const filteredProducts = filterProducts(products)
   return (
     <>
-      <Navbar/>
-      <ItemListContainer products={filteredProducts}/>
+      <Navbar1/>
+      <ItemListContainer 
+        products={filteredProducts}
+        changeFilters={setFilters}
+      />
       <Footer/>
     </>
   )
