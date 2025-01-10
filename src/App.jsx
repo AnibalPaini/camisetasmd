@@ -9,19 +9,21 @@ import { useState } from 'react';
 function useFilters(){
   const [filters, setFilters]= useState({
     equipo:"all",
-    minPrice:0
+    minPrice:0,
+    search:""
   })
 
-  const filterProducts= (products)=>{
-    return products.filter(product =>{
-      return(
-        product.precio>= filters.minPrice &&(
-          filters.equipo==="all" ||
-          product.equipo=== filters.equipo
-        )
-      )
-    })
-  }
+  const filterProducts = (products) => {
+    return products.filter((product) => {
+      return (
+        product.precio >= filters.minPrice &&
+        (filters.equipo === "all" || product.equipo === filters.equipo) &&
+        product.titulo.toLowerCase().includes(filters.search.toLowerCase())
+      );
+    });
+  };
+  
+
 
   return {filterProducts, setFilters}
 }
@@ -30,6 +32,7 @@ function App() {
   const [products]= useState(initialProducts)
   const {filterProducts, setFilters} = useFilters()
   const filteredProducts = filterProducts(products)
+
   return (
     <>
       <Navbar1/>

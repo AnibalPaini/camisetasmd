@@ -14,7 +14,15 @@ function Filters({onChange}) {
   const handleChangeTeam=(event)=>{
     onChange(prevState =>({
       ...prevState,
-      equipo:event.target.value
+      equipo:event.target.value,
+      /* search: "",  */ 
+    }))
+  }
+
+  const handleChangeSearch=(event)=>{
+    onChange(prevState =>({
+      ...prevState,
+      search:event.target.value,
     }))
   }
 
@@ -26,6 +34,10 @@ function Filters({onChange}) {
               <input type="range" id="precio" className="form-range w-75" min="0" max="20000" step="100" onChange={handleChangeMinPrice}></input>
               <span>${minPrice}</span>
             </div>
+        </div>
+        <div>
+          <label htmlFor="buscar" className="form-label">Buscar</label>
+          <input type="text" id='buscar' onChange={handleChangeSearch}/>
         </div>
         <div>
             <label htmlFor="equipo" className="form-label">Equipos:</label>
